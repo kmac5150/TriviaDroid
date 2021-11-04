@@ -20,7 +20,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
- 
+
 public class Signin extends AppCompatActivity {
     private static final int BUFFER_SIZE = 512;
     //have username field and password field and submit button
@@ -80,11 +80,7 @@ public class Signin extends AppCompatActivity {
 
 
 
-        private Activity getView() {
-        }
 
-        private void setContentView(int activity_main) {
-        }
 
 
     }
