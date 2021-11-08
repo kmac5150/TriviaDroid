@@ -20,6 +20,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Button;
+import android.view.View;
 
 public class Signin extends AppCompatActivity {
     private static final int BUFFER_SIZE = 512;
@@ -41,46 +43,57 @@ public class Signin extends AppCompatActivity {
         Socket1.connect(ip, SERVER_PORT);
         //get username and password info
 
-        EditText username = findViewById(R.id.usernamebox);
-        EditText password = findViewById(R.id.passwordbox);
+        EditText username = (EditText)findViewById(R.id.usernamebox);
+        EditText password = (EditText)findViewById(R.id.passwordbox);
+        Button b1 = (Button)findViewById(R.id.signinbutton);
         String usernameStr = username.getText().toString();
         String passwordStr = password.getText().toString();
         // usernameStr = text box
         // passwordStr = text box
-        public void sendMessage(View view){
-            // Do something in response to button click
-            stringBuilder.append("type=sign_in&username=")// combine username and password, build signinString
-            stringBuilder.append(usernameStr);
-            stringBuilder.append("&password=");
-            stringBuilder.append(passwordStr);
-            String signinString = stringBuilder.toString();
-            byte[] signinMessage = signinString.getBytes();
-            int signinMsg_length = signinString.length();
-            // signinString = type=sign_in&username=kellen&password=pass
-            DatagramPacket signinPacket = new DatagramPacket(signinMessage, signinMsg_length, ip, SERVER_PORT);
-
-            byte[] packetIncoming = new byte[BUFFER_SIZE];
-            DatagramPacket packetReceive = new DatagramPacket(packetIncoming, packetIncoming.length);
-            Socket1.receive(packetReceive);
-            System.out.println("Message Recieved :");
-            String ReceiveStr = new String(packetReceive.getData(), packetReceive.getOffset(), packetReceive.getLength());
-            System.out.println(ReceiveStr);
-            String[] token1 = ReceiveStr.split("type=");
-            String[] token2 = ReceiveStr.split("&");
-            String[] token3 = ReceiveStr.split("username=");
-            String[] token4 = ReceiveStr.split("password=");
-            for (String parseStr1 : token1)
-                for (String parseStr2 : token2)
-                    for (String parseStr3 : token3)
-                        for (String parseStr4 : token4)
-                            NumStr = parseStr4.replaceAll("[^\\d.]", ""); //stores token
-
-        }
 
 
 
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
+                public void sendMessage(View view){
+                    // Do something in response to button click
+                    stringBuilder.append("type=sign_in&username=")// combine username and password, build signinString
+                    stringBuilder.append(usernameStr);
+                    stringBuilder.append("&password=");
+                    stringBuilder.append(passwordStr);
+                    String signinString = stringBuilder.toString();
+                    byte[] signinMessage = signinString.getBytes();
+                    int signinMsg_length = signinString.length();
+                    // signinString = type=sign_in&username=kellen&password=pass
+                    DatagramPacket signinPacket = new DatagramPacket(signinMessage, signinMsg_length, ip, SERVER_PORT);
+
+                    byte[] packetIncoming = new byte[BUFFER_SIZE];
+                    DatagramPacket packetReceive = new DatagramPacket(packetIncoming, packetIncoming.length);
+                    Socket1.receive(packetReceive);
+                    System.out.println("Message Recieved :");
+                    String ReceiveStr = new String(packetReceive.getData(), packetReceive.getOffset(), packetReceive.getLength());
+                    System.out.println(ReceiveStr);
+                    String[] token1 = ReceiveStr.split("type=");
+                    String[] token2 = ReceiveStr.split("&");
+                    String[] token3 = ReceiveStr.split("username=");
+                    String[] token4 = ReceiveStr.split("password=");
+                    for (String parseStr1 : token1)
+                        for (String parseStr2 : token2)
+                            for (String parseStr3 : token3)
+                                for (String parseStr4 : token4)
+                                    NumStr = parseStr4.replaceAll("[^\\d.]", ""); //stores token
+
+                }
+
+
+
+            }
 
 
     }
+
+    }
+}
