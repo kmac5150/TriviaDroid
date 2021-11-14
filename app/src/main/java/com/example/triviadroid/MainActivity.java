@@ -45,7 +45,12 @@ public class MainActivity {
             startActivity(intent);
 
         }
+void getQuestion(DatagramPacket p){
+            Intent intent = new intent(this, Menu.class);
 
+
+
+}
 
     }
 

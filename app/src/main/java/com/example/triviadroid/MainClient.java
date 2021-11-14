@@ -92,7 +92,10 @@ public StatusDetails<Pair<String, Instant>> getQuestion(fj.function.Effect2<Stri
 }
 
 
+if(st2.status.first == GameClient.GameStatus.InProgress){
+getQuestion();
 
+        }
 
 
 
